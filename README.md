@@ -4,6 +4,7 @@ Used as the rasterization engine for the paper "LangSplat: 3D Language Gaussian 
 
 
 
+
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
