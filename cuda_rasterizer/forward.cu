@@ -285,11 +285,6 @@ renderCUDA(
 	uint32_t pix_id = W * pix.y + pix.x;
 	float2 pixf = { (float)pix.x, (float)pix.y };
 
-	// if (block.group_index().x == 0 && block.group_index().y == 0 && block.thread_index().x == 0 && block.thread_index().y == 0)
-	// {	
-	// 	printf("language feature 的最后一个数看能不能取到 %.2f \n", language_feature[2354542 * CHANNELS_language_feature + CHANNELS_language_feature-1]);
-	// }
-
 	// Check if this thread is associated with a valid pixel or outside.
 	bool inside = pix.x < W&& pix.y < H;
 	// Done threads can help with fetching, but don't rasterize
@@ -413,8 +408,6 @@ void FORWARD::render(
 	float* out_language_feature,
 	bool include_feature)
 {
-	// clock_t start = clock(); 
-	// printf("一共有 %d x %d 个block, %d x %d 个线程\n", grid.x, grid.y, block.x, block.y);
 	renderCUDA<NUM_CHANNELS, NUM_CHANNELS_language_feature> << <grid, block >> > (
 		ranges,
 		point_list,
@@ -430,11 +423,6 @@ void FORWARD::render(
 		out_language_feature,
 		include_feature);
 
-	// cudaDeviceSynchronize();   
-	
-	// clock_t finish = clock();    
-	// double duration = (double)(finish - start) / CLOCKS_PER_SEC * 1000;   
-	// printf( "--------in cuda forward的运行时间为： %f ms\n", duration ); 
 }
 
 void FORWARD::preprocess(int P, int D, int M,

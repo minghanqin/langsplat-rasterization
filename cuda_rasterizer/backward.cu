@@ -678,7 +678,6 @@ void BACKWARD::render(
 	float* dL_dlanguage_feature,
 	bool include_feature)
 {
-	// clock_t start = clock();   
 	renderCUDA<NUM_CHANNELS, NUM_CHANNELS_language_feature> << <grid, block >> >(
 		ranges,
 		point_list,
@@ -698,10 +697,5 @@ void BACKWARD::render(
 		dL_dcolors,
 		dL_dlanguage_feature,
 		include_feature);
-
-	// cudaDeviceSynchronize();   
-	
-	// clock_t finish = clock();    
-	// double duration = (double)(finish - start) / CLOCKS_PER_SEC * 1000;   
-	// printf( "--------in cuda backward的运行时间为： %f ms\n", duration );  
+ 
 }

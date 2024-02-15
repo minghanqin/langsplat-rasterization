@@ -37,7 +37,7 @@ RasterizeGaussiansCUDA(
 	const torch::Tensor& background,
 	const torch::Tensor& means3D,
     const torch::Tensor& colors,
-	const torch::Tensor& language_feature, // 增加了新的参数
+	const torch::Tensor& language_feature, // new
     const torch::Tensor& opacity,
 	const torch::Tensor& scales,
 	const torch::Tensor& rotations,
@@ -71,7 +71,6 @@ RasterizeGaussiansCUDA(
   torch::Tensor out_language_feature;
   if (include_feature) {
 	out_language_feature = torch::full({NUM_CHANNELS_language_feature, H, W}, 0.0, float_opts);
-	// out_language_feature = torch::full({1}, 0.0, float_opts);
   }
   else {
 	out_language_feature = torch::full({1}, 0.0, float_opts);
