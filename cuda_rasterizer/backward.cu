@@ -491,8 +491,10 @@ renderCUDA(
 			collected_conic_opacity[block.thread_rank()] = conic_opacity[coll_id];
 			for (int i = 0; i < C; i++)
 				collected_colors[i * BLOCK_SIZE + block.thread_rank()] = colors[coll_id * C + i];
-			for (int i = 0; i < F; i++)
-				collected_feature[i * BLOCK_SIZE + block.thread_rank()] = language_feature[coll_id * F + i];
+			if (include_feature) {
+				for (int i = 0; i < F; i++)
+					collected_feature[i * BLOCK_SIZE + block.thread_rank()] = language_feature[coll_id * F + i];
+			}
 		}
 		block.sync();
 
